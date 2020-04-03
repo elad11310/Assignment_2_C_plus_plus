@@ -13,22 +13,35 @@
 namespace family {
     class Node {
     private:
-        Node *father;
-        Node *mother;
+
         std::string name;
         int rank;
+        std::string relation;
+        std::string childName;
+        Node *father;
+        Node *mother;
+
+
 
     public:
+
+
         // outline functions
-        Node(std::string name, int rank);
+        Node(std::string name, int rank, std::string relation, std::string childName);
+
+        //~Node();
 
         Node *getFather();
 
         Node *getMother();
 
-        void setFather(std::string name, int rank);
+        void setFatherNull();
 
-        void setMother(std::string name, int rank);
+        void setMotherNull();
+
+        void setFather(std::string name, int rank, std::string relation, std::string childName);
+
+        void setMother(std::string name, int rank, std::string relation, std::string childName);
 
         void setName(std::string name);
 
@@ -38,35 +51,51 @@ namespace family {
         // returns the name of the person in this node
         std::string getName();
 
+        // get the gender of the preson
+        std::string getRelation();
+
+        std::string getChildName();
+
     };
 
 
     class Tree {
     private:
         Node *root;
-        int treeRank;
 
     public:
+        //constructor
         Tree(std::string root);
 
-        int &getTreeRank();
 
-        void addFather(std::string name, std::string parent);
+        //destructor
+        ~Tree();
 
-        void addMother(std::string name, std::string parent);
+        Tree &addFather(std::string name, std::string parent);
 
+        Tree &addMother(std::string name, std::string parent);
+
+        // given a name the function returns the relation of the person in the tree
         std::string relation(std::string name);
 
+        // the reverse function of relation - given a relation string and reutnrs the name of this person represents this relation
         std::string find(std::string name);
 
-        // search the child in the tree - returns its pointer
-        Node *search(std::string name, Node *current);
+        // search the given node by name/relation in the tree - returns its pointer
+        // the bool isRelation - detemnies what to look for in the tree name/relation
+        Node *search(std::string name, Node *current, bool isRelation);
 
         // display the tree
         void display();
 
         // remove a node
-        bool remove(std::string name);
+        void remove(std::string name);
+
+        // function to delete all nodes in the tree
+        void deleteTree(Node *root);
+
+        // this function returns the relation of the current node
+        std::string checkRelation(int rank, std::string gender);
 
 
     };
