@@ -29,20 +29,19 @@ namespace family {
         // outline functions
         Node(std::string name, int rank, std::string relation, std::string childName);
 
-        //~Node();
-
+        // return a pointer to the father
         Node *getFather();
-
+        // returns a pointer to the mother
         Node *getMother();
-
+        // set the current pointer to father null
         void setFatherNull();
-
+        // set the current pointer to mother null
         void setMotherNull();
-
+        // setting new father
         void setFather(std::string name, int rank, std::string relation, std::string childName);
-
+        // setting new mother
         void setMother(std::string name, int rank, std::string relation, std::string childName);
-
+        // setting name
         void setName(std::string name);
 
         // returns the rank of the node(the depth)
@@ -53,7 +52,7 @@ namespace family {
 
         // get the gender of the preson
         std::string getRelation();
-
+        // getting the child name
         std::string getChildName();
 
     };

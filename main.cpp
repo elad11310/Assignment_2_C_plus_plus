@@ -3,6 +3,10 @@
 
 using namespace std;
 
+#define DOCTEST_CONFIG_IMPLEMENT
+#include "doctest.h"
+using namespace doctest;
+
 int main() {
 
     family::Tree T("Yosef"); // Yosef is the "root" of the tree (the youngest person).
@@ -36,6 +40,13 @@ int main() {
     T.remove("Isaac"); // removes Avraham and Terah
     cout << T.relation("Terah") << endl;  // prints "unrelated"
     T.display();
+
+
+
+
+    Context context;
+    context.addFilter("reporters", "console");
+    context.run();
 
 
     return 0;

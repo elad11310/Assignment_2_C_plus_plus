@@ -3,4 +3,4 @@ project(Matala2)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Matala2 main.cpp AncestorTree.cpp AncestorTree.h)
+add_executable(Matala2 main.cpp AncestorTree.cpp AncestorTree.h doctest.h Test.cpp)

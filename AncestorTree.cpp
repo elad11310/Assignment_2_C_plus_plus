@@ -27,12 +27,6 @@ std::string Node::getChildName() {
 
 }
 
-//Node::~Node(){
-//    //std::cout << "Deleting node:::: " + this->getName()<<std::endl;
-//  delete this;
-//
-//
-//}
 
 std::string Node::getRelation() {
     return this->relation;
@@ -48,10 +42,12 @@ int &Node::getRank() {
 
 void Node::setMother(std::string name, int rank, std::string relation, std::string childName) {
     this->mother = new Node(name, rank, relation, childName);
+
 }
 
 void Node::setFather(std::string name, int rank, std::string relation, std::string childName) {
     this->father = new Node(name, rank, relation, childName);
+
 }
 
 void Node::setName(std::string name) {
@@ -66,6 +62,7 @@ std::string Node::getName() {
 Tree::Tree(std::string root) {
     this->root = new Node(root, 0, "me", "none");
 
+
 }
 
 Tree::~Tree() {
@@ -73,7 +70,7 @@ Tree::~Tree() {
 
 }
 
-void Node::  setFatherNull(){
+void Node::setFatherNull(){
     this->father= nullptr;
 }
 
@@ -87,7 +84,7 @@ void Tree::deleteTree(Node *root) {
 
         deleteTree(root->getFather());
         deleteTree(root->getMother());
-        std::cout << "Deleting node: " << root->getName() << std::endl;
+       // std::cout << "Deleting node: " << root->getName() << std::endl;
         delete (root);
         if (root->getFather() != nullptr)
             root->setFatherNull();
@@ -96,6 +93,7 @@ void Tree::deleteTree(Node *root) {
 
 
     }
+
 
 
 }
@@ -111,7 +109,7 @@ Tree &Tree::addFather(std::string name, std::string parent) {
             }
                 // if a fother already exists, override it
             else {
-                temp->getFather()->setName(name);
+                temp->getFather()->setName(parent);
             }
         } else { // if the child haven't been found
             throw std::invalid_argument("this child doesnt exists");
@@ -136,7 +134,7 @@ Tree &Tree::addMother(std::string name, std::string parent) {
             }
                 // if a mother already exists, override it
             else {
-                temp->getMother()->setName(name);
+                temp->getMother()->setName(parent);
             }
         } else { // if the child haven't been found
             throw std::invalid_argument("this child doesnt exists");
@@ -185,7 +183,7 @@ void Tree::display() { // a function to display the tree by levels.
     if (this->root == nullptr) // in case its empty
         return;
 
-    std::queue<Node *> q;
+    std::queue<Node*> q;
 
 
     q.push(root);
@@ -275,6 +273,7 @@ void Tree::remove(std::string name) {
         // getting the child so after we can point him to null
         Node *child = search(temp->getChildName(), root, false);
 
+        // comparing addresses to know who to delete - mother or father
         if (child->getFather() == temp) {
             child->setFatherNull();
         } else {
@@ -284,9 +283,9 @@ void Tree::remove(std::string name) {
         deleteTree(temp);
 
 
-    } else {
-        throw std::invalid_argument("The tree doesnt contain " + name);
-    }
+    } //else {
+        //throw std::invalid_argument("The tree doesnt contain " + name);
+    //}
 
 
 }
